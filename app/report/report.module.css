@@ -237,3 +237,37 @@
     min-width: 100%;
   }
 }
+
+.warningCard {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, #c94242 58%, var(--border));
+  border-radius: 16px;
+  background: color-mix(in srgb, #c94242 10%, var(--panel));
+}
+
+.warningCard p {
+  margin-bottom: 0;
+}
+
+.sectionNote,
+.sourceNote {
+  margin: 6px 0 0;
+  opacity: .72;
+  font-size: 13px;
+}
+
+.sourceNote {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.compactTable {
+  min-width: 620px !important;
+}
+
+.invalidRow {
+  opacity: .62;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}

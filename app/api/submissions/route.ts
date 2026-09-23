@@ -1,13 +1,19 @@
-import benchmarkData from '../../../public/benchmark.json'
+import { getBenchmarkSnapshot } from '../../../lib/benchmarks'
 import { persistPlaytestResults } from '../../../lib/db'
 import {
   SubmissionValidationError,
   validateSubmissionRequest,
-  type SubmissionBenchmark,
 } from '../../../lib/submission-validation'
 
 const MAX_REQUEST_BYTES = 128 * 1024
-const benchmark = benchmarkData as SubmissionBenchmark
+
+function requestedBenchmarkName(body: unknown): string | null {
+  if (typeof body !== 'object' || body === null || Array.isArray(body)) return null
+  const document = (body as Record<string, unknown>).document
+  if (typeof document !== 'object' || document === null || Array.isArray(document)) return null
+  const benchmark = (document as Record<string, unknown>).benchmark
+  return typeof benchmark === 'string' ? benchmark : null
+}
 
 export async function POST(request: Request): Promise<Response> {
   const contentLength = Number(request.headers.get('content-length') ?? 0)
@@ -17,6 +23,15 @@ export async function POST(request: Request): Promise<Response> {
 
   try {
     const body = await request.json()
+    const benchmarkName = requestedBenchmarkName(body)
+    const benchmark = benchmarkName ? getBenchmarkSnapshot(benchmarkName) : null
+    if (!benchmark) {
+      return Response.json(
+        { error: 'Unexpected benchmark: ' + String(benchmarkName) },
+        { status: 400 },
+      )
+    }
+
     const submission = validateSubmissionRequest(body, benchmark)
     const serverVersion = process.env.VERCEL_GIT_COMMIT_SHA ?? 'local-dev'
     const saved = await persistPlaytestResults(

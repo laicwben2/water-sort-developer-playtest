@@ -1,0 +1,390 @@
+{
+  "version": "difficulty-v2-benchmark-metrics-v1",
+  "source": {
+    "artifactId": 10730213935,
+    "pairedArtifactId": 10730528355,
+    "artifactFile": "audit/difficulty-v2-fullpath-2.json",
+    "batchSeed": "water-sort:difficulty-v2:research-3",
+    "generatorVersion": "0.2.1",
+    "rngVersion": "fnv1a32-mulberry32-v1",
+    "canonicalVersion": "tube-order-v2",
+    "encodingVersion": "tube64-v1",
+    "solverStateEncodingVersion": "packed-tube20-v1",
+    "configFingerprint": "aaa8ea23",
+    "profile": "expanded"
+  },
+  "puzzles": [
+    {
+      "benchmarkId": "B01",
+      "sourceLevelKey": "expanded.hard.k4.c000002",
+      "sourceDifficulty": "hard",
+      "candidateIndex": 2,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 21,
+        "exploredStates": 341,
+        "visitedStates": 822,
+        "generatedMoves": 1294,
+        "averageBranching": 3.7947214076246336
+      },
+      "solutionPath": {
+        "decisionSteps": 20,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 71,
+        "averageChoices": 4.380952380952381,
+        "maximumChoices": 9
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.7183098591549296,
+        "deadEndDensity": 0.056338028169014086,
+        "deadEndRisk": 0.0784313725490196,
+        "averageRecoveryPenalty": 1.127659574468085,
+        "maxRecoveryPenalty": 4
+      }
+    },
+    {
+      "benchmarkId": "B02",
+      "sourceLevelKey": "expanded.easy.k4.c000006",
+      "sourceDifficulty": "easy",
+      "candidateIndex": 6,
+      "sourceEmptyTubes": 1,
+      "minimumRequiredEmptyTubes": 1,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 13,
+        "exploredStates": 31,
+        "visitedStates": 35,
+        "generatedMoves": 39,
+        "averageBranching": 1.2580645161290323
+      },
+      "solutionPath": {
+        "decisionSteps": 6,
+        "forcedSteps": 7,
+        "totalAlternativeMoves": 11,
+        "averageChoices": 1.8461538461538463,
+        "maximumChoices": 5
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.8181818181818182,
+        "deadEndDensity": 0.5454545454545454,
+        "deadEndRisk": 0.6666666666666666,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B03",
+      "sourceLevelKey": "expanded.easy.k4.c000008",
+      "sourceDifficulty": "easy",
+      "candidateIndex": 8,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": false,
+      "benchmarkV1Issue": "missing-required-empty-tube",
+      "solver": {
+        "optimalMoves": 13,
+        "exploredStates": 72,
+        "visitedStates": 180,
+        "generatedMoves": 252,
+        "averageBranching": 3.5
+      },
+      "solutionPath": {
+        "decisionSteps": 12,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 37,
+        "averageChoices": 3.8461538461538463,
+        "maximumChoices": 6
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.7567567567567568,
+        "deadEndDensity": 0,
+        "deadEndRisk": 0,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B04",
+      "sourceLevelKey": "expanded.medium.k4.c000004",
+      "sourceDifficulty": "medium",
+      "candidateIndex": 4,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 20,
+        "exploredStates": 1162,
+        "visitedStates": 1879,
+        "generatedMoves": 3650,
+        "averageBranching": 3.1411359724612735
+      },
+      "solutionPath": {
+        "decisionSteps": 19,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 82,
+        "averageChoices": 5.1,
+        "maximumChoices": 8
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.573170731707317,
+        "deadEndDensity": 0.036585365853658534,
+        "deadEndRisk": 0.06382978723404255,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B05",
+      "sourceLevelKey": "expanded.hard.k4.c000005",
+      "sourceDifficulty": "hard",
+      "candidateIndex": 5,
+      "sourceEmptyTubes": 1,
+      "minimumRequiredEmptyTubes": 1,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 20,
+        "exploredStates": 46,
+        "visitedStates": 56,
+        "generatedMoves": 61,
+        "averageBranching": 1.326086956521739
+      },
+      "solutionPath": {
+        "decisionSteps": 7,
+        "forcedSteps": 13,
+        "totalAlternativeMoves": 16,
+        "averageChoices": 1.8,
+        "maximumChoices": 7
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.9375,
+        "deadEndDensity": 0.6875,
+        "deadEndRisk": 0.7333333333333333,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B06",
+      "sourceLevelKey": "expanded.easy.k4.c000002",
+      "sourceDifficulty": "easy",
+      "candidateIndex": 2,
+      "sourceEmptyTubes": 1,
+      "minimumRequiredEmptyTubes": 1,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 15,
+        "exploredStates": 44,
+        "visitedStates": 49,
+        "generatedMoves": 56,
+        "averageBranching": 1.2727272727272727
+      },
+      "solutionPath": {
+        "decisionSteps": 8,
+        "forcedSteps": 7,
+        "totalAlternativeMoves": 14,
+        "averageChoices": 1.9333333333333333,
+        "maximumChoices": 5
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.7857142857142857,
+        "deadEndDensity": 0.6428571428571429,
+        "deadEndRisk": 0.8181818181818182,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B07",
+      "sourceLevelKey": "expanded.medium.k4.c000002",
+      "sourceDifficulty": "medium",
+      "candidateIndex": 2,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 16,
+        "exploredStates": 184,
+        "visitedStates": 413,
+        "generatedMoves": 659,
+        "averageBranching": 3.5815217391304346
+      },
+      "solutionPath": {
+        "decisionSteps": 15,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 44,
+        "averageChoices": 3.75,
+        "maximumChoices": 7
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.5227272727272727,
+        "deadEndDensity": 0.045454545454545456,
+        "deadEndRisk": 0.08695652173913043,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B08",
+      "sourceLevelKey": "expanded.medium.k4.c000007",
+      "sourceDifficulty": "medium",
+      "candidateIndex": 7,
+      "sourceEmptyTubes": 1,
+      "minimumRequiredEmptyTubes": 1,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 17,
+        "exploredStates": 39,
+        "visitedStates": 49,
+        "generatedMoves": 60,
+        "averageBranching": 1.5384615384615385
+      },
+      "solutionPath": {
+        "decisionSteps": 7,
+        "forcedSteps": 10,
+        "totalAlternativeMoves": 11,
+        "averageChoices": 1.6470588235294117,
+        "maximumChoices": 6
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.6363636363636364,
+        "deadEndDensity": 0.45454545454545453,
+        "deadEndRisk": 0.7142857142857143,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B09",
+      "sourceLevelKey": "expanded.hard.k4.c000009",
+      "sourceDifficulty": "hard",
+      "candidateIndex": 9,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 19,
+        "exploredStates": 79,
+        "visitedStates": 492,
+        "generatedMoves": 585,
+        "averageBranching": 7.405063291139241
+      },
+      "solutionPath": {
+        "decisionSteps": 18,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 88,
+        "averageChoices": 5.631578947368421,
+        "maximumChoices": 9
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.4772727272727273,
+        "deadEndDensity": 0,
+        "deadEndRisk": 0,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B10",
+      "sourceLevelKey": "expanded.hard.k4.c000001",
+      "sourceDifficulty": "hard",
+      "candidateIndex": 1,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 20,
+        "exploredStates": 57,
+        "visitedStates": 241,
+        "generatedMoves": 279,
+        "averageBranching": 4.894736842105263
+      },
+      "solutionPath": {
+        "decisionSteps": 19,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 77,
+        "averageChoices": 4.85,
+        "maximumChoices": 9
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.5844155844155844,
+        "deadEndDensity": 0.025974025974025976,
+        "deadEndRisk": 0.044444444444444446,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    },
+    {
+      "benchmarkId": "B11",
+      "sourceLevelKey": "expanded.medium.k4.c000003",
+      "sourceDifficulty": "medium",
+      "candidateIndex": 3,
+      "sourceEmptyTubes": 1,
+      "minimumRequiredEmptyTubes": 1,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 19,
+        "exploredStates": 60,
+        "visitedStates": 65,
+        "generatedMoves": 106,
+        "averageBranching": 1.7666666666666666
+      },
+      "solutionPath": {
+        "decisionSteps": 13,
+        "forcedSteps": 6,
+        "totalAlternativeMoves": 25,
+        "averageChoices": 2.3157894736842106,
+        "maximumChoices": 6
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.6,
+        "deadEndDensity": 0.44,
+        "deadEndRisk": 0.7333333333333333,
+        "averageRecoveryPenalty": 1.25,
+        "maxRecoveryPenalty": 2
+      }
+    },
+    {
+      "benchmarkId": "B12",
+      "sourceLevelKey": "expanded.easy.k4.c000005",
+      "sourceDifficulty": "easy",
+      "candidateIndex": 5,
+      "sourceEmptyTubes": 2,
+      "minimumRequiredEmptyTubes": 2,
+      "benchmarkV1Valid": true,
+      "benchmarkV1Issue": null,
+      "solver": {
+        "optimalMoves": 16,
+        "exploredStates": 28,
+        "visitedStates": 122,
+        "generatedMoves": 137,
+        "averageBranching": 4.892857142857143
+      },
+      "solutionPath": {
+        "decisionSteps": 15,
+        "forcedSteps": 1,
+        "totalAlternativeMoves": 58,
+        "averageChoices": 4.625,
+        "maximumChoices": 7
+      },
+      "mistakeAnalysis": {
+        "wrongMoveDensity": 0.6551724137931034,
+        "deadEndDensity": 0,
+        "deadEndRisk": 0,
+        "averageRecoveryPenalty": 1,
+        "maxRecoveryPenalty": 1
+      }
+    }
+  ]
+}

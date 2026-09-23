@@ -1,4 +1,10 @@
 import type { PlaytestReportRow } from './db'
+import {
+  BENCHMARK_RESEARCH_METRICS,
+  isResearchMetricValidForBenchmark,
+  sourceDifficultyOrdinal,
+  type BenchmarkResearchMetric,
+} from './benchmark-research'
 import { GIVE_UP_REASONS, type GiveUpReason } from './results'
 
 export const LEGACY_CLIENT_VERSION = '__legacy__'
@@ -28,6 +34,7 @@ export interface AttemptSummary {
   medianElapsedMs: number | null
   medianSolvedElapsedMs: number | null
   medianMoves: number | null
+  medianSolvedMoves: number | null
   averageRestarts: number | null
   averageDifficulty: number | null
   averageConfidence: number | null
@@ -37,6 +44,13 @@ export interface AttemptSummary {
 
 export interface PuzzleReport extends AttemptSummary {
   benchmarkId: string
+}
+
+export interface CorrelationRow {
+  humanMetric: string
+  solverMetric: string
+  rho: number | null
+  sampleSize: number
 }
 
 function average(values: readonly number[]): number | null {
@@ -75,9 +89,7 @@ export function aggregateGiveUpReasons(
   return Array.from(counts.entries())
     .map(([reason, count]) => ({
       reason,
-      label:
-        GIVE_UP_REASON_LABELS[reason as GiveUpReason] ??
-        reason,
+      label: GIVE_UP_REASON_LABELS[reason as GiveUpReason] ?? reason,
       count,
     }))
     .sort((a, b) => {
@@ -103,6 +115,7 @@ export function summarizeRows(
     medianElapsedMs: median(rows.map((row) => row.elapsedMs)),
     medianSolvedElapsedMs: median(solvedRows.map((row) => row.elapsedMs)),
     medianMoves: median(rows.map((row) => row.moves)),
+    medianSolvedMoves: median(solvedRows.map((row) => row.moves)),
     averageRestarts: average(rows.map((row) => row.restarts)),
     averageDifficulty: average(rows.map((row) => row.perceivedDifficulty)),
     averageConfidence: average(presentNumbers(rows.map((row) => row.confidence))),
@@ -130,4 +143,153 @@ export function filterRowsByClientVersion(
     return rows.filter((row) => row.clientVersion === null)
   }
   return rows.filter((row) => row.clientVersion === selectedVersion)
+}
+
+function ranks(values: readonly number[]): number[] {
+  const indexed = values
+    .map((value, index) => ({ value, index }))
+    .sort((a, b) => a.value - b.value)
+  const result = new Array<number>(values.length)
+
+  let start = 0
+  while (start < indexed.length) {
+    let end = start
+    while (end + 1 < indexed.length && indexed[end + 1].value === indexed[start].value) {
+      end += 1
+    }
+    const averageRank = (start + end + 2) / 2
+    for (let index = start; index <= end; index += 1) {
+      result[indexed[index].index] = averageRank
+    }
+    start = end + 1
+  }
+
+  return result
+}
+
+function pearson(first: readonly number[], second: readonly number[]): number | null {
+  if (first.length !== second.length || first.length < 3) return null
+  const firstMean = average(first)
+  const secondMean = average(second)
+  if (firstMean === null || secondMean === null) return null
+
+  let covariance = 0
+  let firstVariance = 0
+  let secondVariance = 0
+  for (let index = 0; index < first.length; index += 1) {
+    const firstDelta = first[index] - firstMean
+    const secondDelta = second[index] - secondMean
+    covariance += firstDelta * secondDelta
+    firstVariance += firstDelta * firstDelta
+    secondVariance += secondDelta * secondDelta
+  }
+
+  const denominator = Math.sqrt(firstVariance * secondVariance)
+  return denominator === 0 ? null : covariance / denominator
+}
+
+function spearman(points: readonly [number, number][]): number | null {
+  if (points.length < 3) return null
+  return pearson(
+    ranks(points.map(([human]) => human)),
+    ranks(points.map(([, solver]) => solver)),
+  )
+}
+
+function metricPairs(
+  puzzleReports: readonly PuzzleReport[],
+  benchmark: string,
+  humanValue: (report: PuzzleReport) => number | null,
+  solverValue: (metric: BenchmarkResearchMetric) => number,
+): Array<[number, number]> {
+  const byId = new Map(puzzleReports.map((report) => [report.benchmarkId, report]))
+  const points: Array<[number, number]> = []
+
+  for (const metric of BENCHMARK_RESEARCH_METRICS) {
+    if (!isResearchMetricValidForBenchmark(metric, benchmark)) continue
+    const report = byId.get(metric.benchmarkId)
+    if (!report || report.sampleCount === 0) continue
+    const human = humanValue(report)
+    if (human === null) continue
+    points.push([human, solverValue(metric)])
+  }
+
+  return points
+}
+
+export function buildHumanSolverCorrelations(
+  puzzleReports: readonly PuzzleReport[],
+  benchmark: string,
+): CorrelationRow[] {
+  const definitions = [
+    {
+      humanMetric: '平均主觀難度',
+      solverMetric: '來源 Easy/Medium/Hard',
+      human: (report: PuzzleReport) => report.averageDifficulty,
+      solver: (metric: BenchmarkResearchMetric) => sourceDifficultyOrdinal(metric.sourceDifficulty),
+    },
+    {
+      humanMetric: '平均主觀難度',
+      solverMetric: 'Optimal moves',
+      human: (report: PuzzleReport) => report.averageDifficulty,
+      solver: (metric: BenchmarkResearchMetric) => metric.solver.optimalMoves,
+    },
+    {
+      humanMetric: '平均主觀難度',
+      solverMetric: 'Wrong-move density',
+      human: (report: PuzzleReport) => report.averageDifficulty,
+      solver: (metric: BenchmarkResearchMetric) => metric.mistakeAnalysis.wrongMoveDensity,
+    },
+    {
+      humanMetric: '平均主觀難度',
+      solverMetric: 'Dead-end density',
+      human: (report: PuzzleReport) => report.averageDifficulty,
+      solver: (metric: BenchmarkResearchMetric) => metric.mistakeAnalysis.deadEndDensity,
+    },
+    {
+      humanMetric: '平均主觀難度',
+      solverMetric: 'Dead-end risk',
+      human: (report: PuzzleReport) => report.averageDifficulty,
+      solver: (metric: BenchmarkResearchMetric) => metric.mistakeAnalysis.deadEndRisk,
+    },
+    {
+      humanMetric: '平均主觀難度',
+      solverMetric: 'Solver average branching',
+      human: (report: PuzzleReport) => report.averageDifficulty,
+      solver: (metric: BenchmarkResearchMetric) => metric.solver.averageBranching,
+    },
+    {
+      humanMetric: '完成者中位用時',
+      solverMetric: 'Optimal moves',
+      human: (report: PuzzleReport) => report.medianSolvedElapsedMs,
+      solver: (metric: BenchmarkResearchMetric) => metric.solver.optimalMoves,
+    },
+    {
+      humanMetric: '完成者中位步數',
+      solverMetric: 'Optimal moves',
+      human: (report: PuzzleReport) => report.medianSolvedMoves,
+      solver: (metric: BenchmarkResearchMetric) => metric.solver.optimalMoves,
+    },
+    {
+      humanMetric: '平均重開',
+      solverMetric: 'Dead-end density',
+      human: (report: PuzzleReport) => report.averageRestarts,
+      solver: (metric: BenchmarkResearchMetric) => metric.mistakeAnalysis.deadEndDensity,
+    },
+  ]
+
+  return definitions.map((definition) => {
+    const points = metricPairs(
+      puzzleReports,
+      benchmark,
+      definition.human,
+      definition.solver,
+    )
+    return {
+      humanMetric: definition.humanMetric,
+      solverMetric: definition.solverMetric,
+      rho: spearman(points),
+      sampleSize: points.length,
+    }
+  })
 }

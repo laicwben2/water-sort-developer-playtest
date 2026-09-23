@@ -1,6 +1,6 @@
 {
-  "version": "difficulty-v2-benchmark-blind-v2",
-  "benchmark": "difficulty-v2-benchmark-v2",
+  "version": "difficulty-v2-benchmark-blind-v1",
+  "benchmark": "difficulty-v2-benchmark-v1",
   "puzzles": [
     {
       "benchmarkId": "B01",
@@ -123,7 +123,6 @@
           4,
           2
         ],
-        [],
         []
       ]
     },
