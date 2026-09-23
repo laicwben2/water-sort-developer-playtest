@@ -24,6 +24,14 @@ Current scope:
 
 Only finished/gave-up puzzles with submitted feedback are persisted. Reloading during an active puzzle discards that in-progress attempt.
 
+## Documentation
+
+- [Research methodology](docs/research-methodology.md) — measurement definitions, data-quality rules, provenance, and interpretation constraints.
+- [Development history](docs/development-history.md) — important UI, storage, schema, and reporting changes.
+- [Next steps](docs/next-steps.md) — current handoff state and the planned human-vs-solver correlation work.
+
+These documents are intended to make a new session or developer able to resume the research workflow without relying only on chat history or commit messages.
+
 ## Local development
 
 ```bash
@@ -45,7 +53,9 @@ DATABASE_URL=postgresql://...
 
 Provision Neon through the Vercel Marketplace when the app is deployed. The database client is initialized lazily, so `next build` succeeds before `DATABASE_URL` exists.
 
-The API creates `playtest_submissions` and its benchmark index on first successful request. Rows are keyed by:
+The app keeps the submission schema idempotently ready before both writes and report reads. This includes creating the table/index when needed and adding provenance columns with `ADD COLUMN IF NOT EXISTS`.
+
+Rows are keyed by:
 
 ```text
 (session_id, benchmark, benchmark_id)
@@ -55,7 +65,7 @@ Resubmitting the same session/puzzle updates the existing row instead of adding 
 
 ## Research report
 
-Open `/report` for a server-rendered, read-only view over the Neon submissions table.
+Open `/report` for a server-rendered, read-only aggregation over the Neon submissions table.
 
 It includes:
 
