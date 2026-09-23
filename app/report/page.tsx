@@ -115,7 +115,7 @@ export default async function ReportPage({ searchParams }: ReportPageProps) {
     ? params.benchmark[0]
     : params.benchmark
   const selectedBenchmark =
-    (requestedBenchmark && getBenchmarkSnapshot(requestedBenchmark)) ??
+    (requestedBenchmark ? getBenchmarkSnapshot(requestedBenchmark) : null) ??
     LEGACY_BENCHMARK
 
   let rows: PlaytestReportRow[] = []
