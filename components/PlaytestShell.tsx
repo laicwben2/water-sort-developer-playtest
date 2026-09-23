@@ -390,20 +390,22 @@ export function PlaytestShell() {
               <span>{currentPuzzle.benchmarkId}</span>
             </div>
 
-            <div className="order">
-              {orderedPuzzles.map((puzzle, index) => (
-                <div
-                  key={puzzle.benchmarkId}
-                  className={
-                    'pill' +
-                    (index === currentIndex ? ' current' : '') +
-                    (completedIds.has(puzzle.benchmarkId) ? ' completed' : '')
-                  }
-                >
-                  {puzzle.benchmarkId}
-                </div>
-              ))}
-            </div>
+            {phase === 'ready' && (
+              <div className="order">
+                {orderedPuzzles.map((puzzle, index) => (
+                  <div
+                    key={puzzle.benchmarkId}
+                    className={
+                      'pill' +
+                      (index === currentIndex ? ' current' : '') +
+                      (completedIds.has(puzzle.benchmarkId) ? ' completed' : '')
+                    }
+                  >
+                    {puzzle.benchmarkId}
+                  </div>
+                ))}
+              </div>
+            )}
           </>
         )}
 
@@ -420,10 +422,10 @@ export function PlaytestShell() {
         {(phase === 'playing' || phase === 'feedback') && currentPuzzle && (
           <>
             <div className="stats">
-              <div><span>時間</span><strong>{formatTime(elapsedMs)}</strong></div>
-              <div><span>累積步數</span><strong>{moves}</strong></div>
-              <div><span>重開</span><strong>{restarts}</strong></div>
-              <div>
+              <div className="stat"><span>時間</span><strong>{formatTime(elapsedMs)}</strong></div>
+              <div className="stat"><span>步數</span><strong>{moves}</strong></div>
+              <div className="stat"><span>重開</span><strong>{restarts}</strong></div>
+              <div className="stat">
                 <span>狀態</span>
                 <strong>
                   {phase === 'playing'
@@ -435,33 +437,43 @@ export function PlaytestShell() {
               </div>
             </div>
 
-            <div className="board" aria-label={currentPuzzle.benchmarkId}>
-              {board.map((tube, tubeIndex) => (
-                <button
-                  className={'tube' + (selectedTube === tubeIndex ? ' selected' : '')}
-                  key={tubeIndex}
-                  type="button"
-                  disabled={phase !== 'playing'}
-                  onClick={() => handleTubeClick(tubeIndex)}
-                  aria-label={`試管 ${tubeIndex + 1}`}
-                >
-                  {Array.from({ length: currentPuzzle.capacity }, (_, slot) => {
-                    const color = tube[slot]
-                    return (
-                      <span
-                        className="cell"
-                        key={slot}
-                        style={{
-                          background:
-                            color === undefined
-                              ? 'transparent'
-                              : palette[color % palette.length],
-                        }}
-                      />
-                    )
-                  })}
-                </button>
-              ))}
+            {message && phase !== 'playing' && phase !== 'feedback' && (
+          <p className="message">{message}</p>
+        )}
+
+            <div className="board-wrap">
+              <div className="board" aria-label={currentPuzzle.benchmarkId}>
+                {board.map((tube, tubeIndex) => (
+                  <button
+                    className={'tube' + (selectedTube === tubeIndex ? ' selected' : '')}
+                    key={tubeIndex}
+                    type="button"
+                    disabled={phase !== 'playing'}
+                    onClick={() => handleTubeClick(tubeIndex)}
+                    aria-label={`試管 ${tubeIndex + 1}`}
+                  >
+                    {Array.from({ length: currentPuzzle.capacity }, (_, slot) => {
+                      const color = tube[slot]
+                      return (
+                        <span
+                          className="cell"
+                          key={slot}
+                          style={{
+                            background:
+                              color === undefined
+                                ? 'transparent'
+                                : palette[color % palette.length],
+                            borderColor:
+                              color === undefined
+                                ? 'transparent'
+                                : 'rgba(0,0,0,.2)',
+                          }}
+                        />
+                      )
+                    })}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {phase === 'playing' && (

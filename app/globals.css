@@ -8,7 +8,7 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: Canvas; color: CanvasText; }
-main { width: min(900px, 100%); margin: 0 auto; padding: 28px 18px 56px; }
+main { width: min(980px, 100%); margin: 0 auto; padding: 24px 18px 48px; }
 h1 { margin: 0 0 8px; font-size: clamp(26px, 4vw, 38px); }
 h2 { margin: 0 0 14px; }
 p { line-height: 1.6; }
@@ -41,30 +41,36 @@ button.danger { border-color: color-mix(in srgb, var(--danger) 65%, var(--border
   border-radius: 14px; padding: 24px;
 }
 .stats {
-  margin-top: 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  margin-top: 18px; padding: 12px 14px; display: flex; flex-wrap: wrap;
+  gap: 10px; align-items: center; border: 1px solid var(--border);
+  border-radius: 12px; background: var(--panel);
 }
-.stats > div { padding: 10px; border: 1px solid var(--border); border-radius: 10px; }
-.stats span { display: block; opacity: .65; font-size: 13px; }
-.stats strong { display: block; margin-top: 3px; font-size: 18px; }
+.stat { min-width: 110px; }
+.stats span { display: block; opacity: .7; font-size: 13px; }
+.stats strong { display: block; margin-top: 2px; font-size: 20px; }
+.board-wrap {
+  min-height: 350px; display: grid; place-items: center; padding: 18px 0 8px;
+}
 .board {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; align-items: flex-end;
-  margin-top: 22px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; align-items: flex-end;
 }
 .tube {
-  width: 52px; height: 178px; padding: 5px 4px 10px;
+  width: 58px; height: 198px; padding: 6px 5px 12px;
   border: 3px solid color-mix(in srgb, CanvasText 62%, transparent);
-  border-top-color: transparent; border-radius: 0 0 16px 16px;
+  border-top-color: transparent; border-radius: 0 0 18px 18px;
   display: flex; flex-direction: column-reverse; gap: 3px;
-  background: color-mix(in srgb, Canvas 92%, CanvasText 8%);
+  background: color-mix(in srgb, Canvas 90%, CanvasText 10%);
   transition: transform .12s ease, box-shadow .12s ease;
 }
 .tube:not(:disabled):hover { transform: translateY(-3px); }
 .tube.selected {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
   box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 35%, transparent);
 }
-.cell { width: 100%; height: 33px; border-radius: 7px; display: block; }
+.cell {
+  width: 100%; height: 38px; border-radius: 8px; display: block;
+  border: 1px solid transparent;
+}
 .controls { margin-top: 18px; justify-content: center; }
 .message { font-weight: 650; min-height: 24px; }
 .feedback {
@@ -81,7 +87,8 @@ fieldset {
 textarea { min-height: 80px; resize: vertical; width: 100%; }
 @media (max-width: 600px) {
   main { padding-inline: 12px; }
-  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .tube { width: 46px; height: 164px; }
-  .cell { height: 30px; }
+  .stat { min-width: calc(50% - 6px); }
+  .board-wrap { min-height: 320px; }
+  .tube { width: 48px; height: 170px; }
+  .cell { height: 32px; }
 }
