@@ -115,6 +115,8 @@ export async function readPlaytestReportRows(
   benchmark: string,
 ): Promise<PlaytestReportRow[]> {
   const sql = getSql()
+  // Idempotent schema readiness only; the report query itself never mutates submission rows.
+  await ensureSchema(sql)
 
   const rows = await sql`
     SELECT
