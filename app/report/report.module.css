@@ -1,0 +1,239 @@
+.page {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: 24px 18px 48px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.headerRow h1 {
+  margin-top: 8px;
+}
+
+.backLink {
+  color: inherit;
+  text-decoration: none;
+  opacity: .72;
+}
+
+.backLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.subtitle {
+  max-width: 760px;
+  margin: 0;
+  opacity: .72;
+}
+
+.benchmarkBadge {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.filterCard,
+.section,
+.noteCard,
+.errorCard {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+}
+
+.filterForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+}
+
+.filterForm label {
+  display: grid;
+  gap: 6px;
+  min-width: min(360px, 100%);
+}
+
+.filterNote {
+  margin: 10px 0 0;
+  font-size: 13px;
+  opacity: .68;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.metricCard {
+  min-height: 112px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.metricCard span {
+  font-size: 13px;
+  opacity: .68;
+}
+
+.metricCard strong {
+  font-size: 28px;
+}
+
+.metricCard .smallMetric {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.section h2 {
+  margin-bottom: 4px;
+}
+
+.sectionHeading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: end;
+}
+
+.sectionHeading p {
+  margin: 0 0 10px;
+  opacity: .68;
+  font-size: 14px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin-top: 14px;
+}
+
+.tableWrap table {
+  width: 100%;
+  min-width: 1160px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.tableWrap th,
+.tableWrap td {
+  padding: 10px 9px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.tableWrap thead th {
+  font-size: 12px;
+  opacity: .68;
+  font-weight: 650;
+}
+
+.tableWrap th:first-child,
+.tableWrap td:first-child,
+.tableWrap th:last-child,
+.tableWrap td:last-child {
+  text-align: left;
+}
+
+.tableWrap tbody tr:last-child th,
+.tableWrap tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cellNote {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  opacity: .58;
+}
+
+.reasonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.reasonCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: baseline;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.reasonCard strong {
+  grid-row: 1 / span 2;
+  font-size: 24px;
+}
+
+.reasonCard span {
+  font-size: 14px;
+}
+
+.reasonCard code {
+  opacity: .6;
+  font-size: 11px;
+}
+
+.emptyState {
+  margin-bottom: 0;
+  opacity: .68;
+}
+
+.noteCard p,
+.errorCard p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .headerRow {
+    display: block;
+  }
+
+  .benchmarkBadge {
+    display: inline-block;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding-inline: 12px;
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .filterForm label {
+    min-width: 100%;
+  }
+}

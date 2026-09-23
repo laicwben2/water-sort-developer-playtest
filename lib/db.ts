@@ -90,3 +90,85 @@ export async function persistPlaytestResults(
 
   return results.length
 }
+
+export interface PlaytestReportRow {
+  sessionId: string
+  benchmarkId: string
+  outcome: 'solved' | 'gave-up'
+  elapsedMs: number
+  moves: number
+  restarts: number
+  perceivedDifficulty: number
+  confidence: number | null
+  frustration: number | null
+  giveUpReasons: string[]
+  clientVersion: string | null
+  serverVersion: string | null
+  updatedAt: string
+}
+
+function nullableNumber(value: unknown): number | null {
+  return value === null || value === undefined ? null : Number(value)
+}
+
+export async function readPlaytestReportRows(
+  benchmark: string,
+): Promise<PlaytestReportRow[]> {
+  const sql = getSql()
+
+  const rows = await sql`
+    SELECT
+      session_id::text AS "sessionId",
+      benchmark_id AS "benchmarkId",
+      result->>'outcome' AS "outcome",
+      (result->>'elapsedMs')::bigint AS "elapsedMs",
+      (result->>'moves')::integer AS "moves",
+      (result->>'restarts')::integer AS "restarts",
+      (result->>'perceivedDifficulty')::integer AS "perceivedDifficulty",
+      (result->>'confidence')::integer AS "confidence",
+      (result->>'frustration')::integer AS "frustration",
+      CASE
+        WHEN jsonb_typeof(result->'giveUpReasons') = 'array'
+          THEN result->'giveUpReasons'
+        ELSE '[]'::jsonb
+      END AS "giveUpReasons",
+      client_version AS "clientVersion",
+      server_version AS "serverVersion",
+      updated_at AS "updatedAt"
+    FROM playtest_submissions
+    WHERE benchmark = ${benchmark}
+    ORDER BY benchmark_id, updated_at
+  `
+
+  return (rows as unknown as Record<string, unknown>[]).map((row) => {
+    const outcome = row.outcome
+    if (outcome !== 'solved' && outcome !== 'gave-up') {
+      throw new Error('Unexpected playtest outcome in database')
+    }
+
+    const reasons = Array.isArray(row.giveUpReasons)
+      ? row.giveUpReasons.filter((reason): reason is string => typeof reason === 'string')
+      : []
+
+    const updatedAt =
+      row.updatedAt instanceof Date
+        ? row.updatedAt.toISOString()
+        : String(row.updatedAt)
+
+    return {
+      sessionId: String(row.sessionId),
+      benchmarkId: String(row.benchmarkId),
+      outcome,
+      elapsedMs: Number(row.elapsedMs),
+      moves: Number(row.moves),
+      restarts: Number(row.restarts),
+      perceivedDifficulty: Number(row.perceivedDifficulty),
+      confidence: nullableNumber(row.confidence),
+      frustration: nullableNumber(row.frustration),
+      giveUpReasons: reasons,
+      clientVersion: row.clientVersion === null ? null : String(row.clientVersion),
+      serverVersion: row.serverVersion === null ? null : String(row.serverVersion),
+      updatedAt,
+    }
+  })
+}
