@@ -166,3 +166,25 @@ Changes:
 - automatically excludes invalid v1 B03 from correlations.
 
 The benchmark version bump is intentional: v1 and v2 must never share the same database uniqueness namespace because B03 represents a different board.
+
+
+## 2026-09-23 — Production build fix for benchmark-aware report
+
+### `af0480e` — Fix benchmark selection type narrowing
+
+The first deployments of the benchmark-aware report failed the Next.js production build with a TypeScript error.
+
+Cause:
+
+- the expression used to choose the requested benchmark relied on `requestedBenchmark && getBenchmarkSnapshot(...)`;
+- TypeScript correctly preserved the possible empty-string branch, so `selectedBenchmark` was inferred as `string | BenchmarkSnapshot`;
+- later access to `.benchmark` and `.puzzles` therefore failed type checking.
+
+The selection now uses an explicit conditional before nullish fallback:
+
+```ts
+(requestedBenchmark ? getBenchmarkSnapshot(requestedBenchmark) : null) ??
+LEGACY_BENCHMARK
+```
+
+Production deployment for `af0480e` reached `READY`. The v1 report was then verified over the live Neon data with B03 excluded from correlation.
