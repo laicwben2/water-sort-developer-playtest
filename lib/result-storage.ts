@@ -38,11 +38,12 @@ export function buildResultsDocument(
 export async function submitResults(
   sessionId: string,
   document: PlaytestResultsDocument,
+  clientVersion: string,
 ): Promise<void> {
   const response = await fetch('/api/submissions', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ sessionId, document }),
+    body: JSON.stringify({ sessionId, clientVersion, document }),
   })
 
   if (!response.ok) {

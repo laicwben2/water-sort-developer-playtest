@@ -59,7 +59,7 @@ function formatTime(milliseconds: number): string {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${tenths}`
 }
 
-export function PlaytestShell() {
+export function PlaytestShell({ clientVersion }: { clientVersion: string }) {
   const [benchmark, setBenchmark] = useState<BlindBenchmark | null>(null)
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [phase, setPhase] = useState<Phase>('intro')
@@ -110,7 +110,11 @@ export function PlaytestShell() {
     setResults(stored)
 
     if (stored.length > 0) {
-      submitResults(sessionId, buildResultsDocument(benchmark.benchmark, stored))
+      submitResults(
+        sessionId,
+        buildResultsDocument(benchmark.benchmark, stored),
+        clientVersion,
+      )
         .catch((error) => {
           console.warn('Background playtest sync failed', error)
         })
@@ -126,7 +130,7 @@ export function PlaytestShell() {
     } else {
       setCurrentIndex(firstPending === -1 ? 0 : firstPending)
     }
-  }, [benchmark, orderedPuzzles, sessionId])
+  }, [benchmark, clientVersion, orderedPuzzles, sessionId])
 
   useEffect(() => {
     return () => {
@@ -311,6 +315,7 @@ export function PlaytestShell() {
       await submitResults(
         sessionId,
         buildResultsDocument(benchmark.benchmark, nextResults),
+        clientVersion,
       )
     } catch (error) {
       console.warn('Playtest sync failed', error)

@@ -18,10 +18,13 @@ export async function POST(request: Request): Promise<Response> {
   try {
     const body = await request.json()
     const submission = validateSubmissionRequest(body, benchmark)
+    const serverVersion = process.env.VERCEL_GIT_COMMIT_SHA ?? 'local-dev'
     const saved = await persistPlaytestResults(
       submission.sessionId,
       submission.document.benchmark,
       submission.document.results,
+      submission.clientVersion,
+      serverVersion,
     )
     return Response.json({ ok: true, saved })
   } catch (error) {

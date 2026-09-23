@@ -22,10 +22,20 @@ async function ensureSchema(sql: SqlClient): Promise<void> {
           benchmark TEXT NOT NULL,
           benchmark_id TEXT NOT NULL,
           result JSONB NOT NULL,
+          client_version TEXT,
+          server_version TEXT,
           created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
           updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
           PRIMARY KEY (session_id, benchmark, benchmark_id)
         )
+      `
+      await sql`
+        ALTER TABLE playtest_submissions
+        ADD COLUMN IF NOT EXISTS client_version TEXT
+      `
+      await sql`
+        ALTER TABLE playtest_submissions
+        ADD COLUMN IF NOT EXISTS server_version TEXT
       `
       await sql`
         CREATE INDEX IF NOT EXISTS playtest_submissions_benchmark_idx
@@ -40,6 +50,8 @@ export async function persistPlaytestResults(
   sessionId: string,
   benchmark: string,
   results: readonly PlaytestResult[],
+  clientVersion: string,
+  serverVersion: string,
 ): Promise<number> {
   const sql = getSql()
   await ensureSchema(sql)
@@ -53,6 +65,8 @@ export async function persistPlaytestResults(
           benchmark,
           benchmark_id,
           result,
+          client_version,
+          server_version,
           created_at,
           updated_at
         )
@@ -61,6 +75,8 @@ export async function persistPlaytestResults(
           ${benchmark},
           ${result.benchmarkId},
           ${payload}::jsonb,
+          ${clientVersion},
+          ${serverVersion},
           NOW(),
           NOW()
         )

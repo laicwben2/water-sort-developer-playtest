@@ -7,6 +7,7 @@ import {
 
 export interface SubmissionRequest {
   sessionId: string
+  clientVersion: string
   document: PlaytestResultsDocument
 }
 
@@ -210,13 +211,20 @@ export function validateSubmissionRequest(
   benchmark: SubmissionBenchmark,
 ): SubmissionRequest {
   if (!isRecord(raw)) fail('Submission must be an object')
-  exactKeys(raw, ['sessionId', 'document'], 'submission')
+  exactKeys(raw, ['sessionId', 'clientVersion', 'document'], 'submission')
 
   if (
     typeof raw.sessionId !== 'string' ||
     !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(raw.sessionId)
   ) {
     fail('sessionId must be a UUID')
+  }
+
+  if (
+    typeof raw.clientVersion !== 'string' ||
+    !/^(?:[0-9a-f]{40}|local-dev)$/i.test(raw.clientVersion)
+  ) {
+    fail('clientVersion must be a 40-character git SHA or local-dev')
   }
 
   if (!isRecord(raw.document)) fail('document must be an object')
@@ -252,6 +260,7 @@ export function validateSubmissionRequest(
 
   return {
     sessionId: raw.sessionId,
+    clientVersion: raw.clientVersion,
     document: {
       version: 'difficulty-v2-playtest-results-v2',
       benchmark: benchmark.benchmark,
