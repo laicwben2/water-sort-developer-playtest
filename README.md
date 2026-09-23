@@ -31,7 +31,7 @@ The active tester benchmark is `difficulty-v2-benchmark-v2`. It supersedes v1 af
 
 - [Research methodology](docs/research-methodology.md) — measurement definitions, data-quality rules, provenance, and interpretation constraints.
 - [Development history](docs/development-history.md) — important UI, storage, schema, and reporting changes.
-- [Next steps](docs/next-steps.md) — current handoff state and the planned human-vs-solver correlation work.
+- [Next steps](docs/next-steps.md) — current handoff state and the next calibration/data-collection work.
 
 These documents are intended to make a new session or developer able to resume the research workflow without relying only on chat history or commit messages.
 
@@ -82,4 +82,4 @@ It includes:
 - server-only solver/source metrics and per-puzzle human-vs-solver comparison;
 - exploratory Spearman correlations, with invalid benchmark samples excluded.
 
-The report intentionally exposes aggregate research data only. It does not show session IDs, individual action histories, final boards, or free-text give-up notes. Solver metrics and human-vs-solver correlation are intentionally deferred to the next research stage.
+The report intentionally exposes aggregate research data only. It does not show session IDs, individual action histories, final boards, or free-text give-up notes. Solver metrics and human-vs-solver correlations are available only in the research report; they are never sent to the blind tester UI.
