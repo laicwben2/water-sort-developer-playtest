@@ -149,3 +149,60 @@ Before treating human-vs-solver results as calibration evidence:
 5. Keep raw human measures separate from derived composite difficulty scores.
 6. Join solver/generator metrics outside the blind tester UI.
 7. Record the exact solver/generator version used to compute comparison metrics.
+
+
+## Benchmark v1 defect and v2 correction
+
+During the first human-vs-solver provenance recovery, B03 was traced to the authoritative research-3 source puzzle:
+
+```text
+expanded.easy.k4.c000008
+```
+
+Source provenance:
+
+- full-path GitHub Actions artifact: `10730213935`;
+- paired cap8 artifact: `10730528355`;
+- batch seed: `water-sort:difficulty-v2:research-3`;
+- generator version: `0.2.1`;
+- config fingerprint: `aaa8ea23`.
+
+The source puzzle has two empty tubes and records:
+
+```text
+minimumRequiredEmptyTubes = 2
+```
+
+Its stored empty-tube analysis proves the same filled board with one empty tube is `unsolvable`.
+
+The v1 blind manifest accidentally copied B03 with only one empty tube. Therefore:
+
+- v1 B03 is an invalid benchmark sample;
+- its human result remains stored for audit purposes;
+- v1 B03 must be excluded from calibration/correlation;
+- no solver metrics from the two-empty source board may be interpreted as metrics for the one-empty v1 board.
+
+The active tester benchmark is now `difficulty-v2-benchmark-v2`. It restores B03's second empty tube and uses a new benchmark identity so new samples cannot upsert into or mix with v1 rows.
+
+All other B01–B12 v1 boards matched their research-3 source boards exactly.
+
+## Human-vs-solver correlation
+
+The research report now joins human aggregates with a server-only metric manifest derived from artifact `10730213935`.
+
+The initial analysis uses Spearman rank correlation because the main subjective difficulty measure is ordinal and sample counts are small.
+
+The report currently compares selected pairs including:
+
+- subjective difficulty vs source Easy/Medium/Hard;
+- subjective difficulty vs optimal moves;
+- subjective difficulty vs wrong-move density;
+- subjective difficulty vs dead-end density/risk;
+- subjective difficulty vs solver average branching;
+- solved-only time vs optimal moves;
+- solved-only moves vs optimal moves;
+- restarts vs dead-end density.
+
+Correlation rows state their effective puzzle count. For v1, B03 is automatically excluded.
+
+These statistics are exploratory. Multiple independent v2 sessions are still required before using them for difficulty calibration.

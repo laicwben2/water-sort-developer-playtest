@@ -19,10 +19,13 @@ Current scope:
 - server-side v2 validation plus full classic-v1 action replay before persistence;
 - automatic background re-submit of locally saved results after reload;
 - client/server git provenance for newly persisted samples;
-- read-only aggregated research report at `/report`, filterable by client version;
+- read-only aggregated research report at `/report`, filterable by benchmark and client version;
+- server-only human-vs-solver metric mapping and Spearman correlation view;
 - no source difficulty, solver metrics, or optimal-move metadata in the blind playtest UI.
 
 Only finished/gave-up puzzles with submitted feedback are persisted. Reloading during an active puzzle discards that in-progress attempt.
+
+The active tester benchmark is `difficulty-v2-benchmark-v2`. It supersedes v1 after discovering that v1 B03 accidentally omitted one required empty tube. Legacy v1 data is retained for audit/reporting, with B03 excluded from human-vs-solver correlation.
 
 ## Documentation
 
@@ -75,6 +78,8 @@ It includes:
 - median move count and average restart count;
 - average perceived difficulty, confidence, and frustration;
 - give-up reason aggregation;
-- filtering by `client_version`, with pre-provenance rows grouped as legacy/unknown.
+- filtering by benchmark and `client_version`, with pre-provenance rows grouped as legacy/unknown;
+- server-only solver/source metrics and per-puzzle human-vs-solver comparison;
+- exploratory Spearman correlations, with invalid benchmark samples excluded.
 
 The report intentionally exposes aggregate research data only. It does not show session IDs, individual action histories, final boards, or free-text give-up notes. Solver metrics and human-vs-solver correlation are intentionally deferred to the next research stage.

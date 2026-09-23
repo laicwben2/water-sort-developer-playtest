@@ -114,3 +114,55 @@ Treat it as:
 but not as a clean formal calibration dataset.
 
 See [research-methodology.md](research-methodology.md) for the formal interpretation rules.
+
+
+## 2026-09-23 — Recover authoritative benchmark provenance
+
+Recovered the original Difficulty v2 research artifacts from GitHub Actions rather than recomputing metrics under a newer algorithm.
+
+Authoritative full-path artifact:
+
+```text
+artifact 10730213935
+audit/difficulty-v2-fullpath-2.json
+seed water-sort:difficulty-v2:research-3
+generator 0.2.1
+config aaa8ea23
+```
+
+Paired cap8 artifact: `10730528355`.
+
+Board matching recovered the source candidates for B01–B12. The server-only mapping is stored in:
+
+```text
+data/benchmarks/difficulty-v2-benchmark-metrics-v1.json
+```
+
+## 2026-09-23 — Discover invalid B03 in benchmark v1
+
+B03 corresponded to source candidate `expanded.easy.k4.c000008`.
+
+The source contains two empty tubes and records a minimum requirement of two. The v1 blind manifest contained only one empty tube. The source solver's stored empty-tube analysis explicitly classifies the one-empty variant as unsolvable.
+
+This explains why the first-round B03 result cannot be used as a normal human difficulty sample.
+
+The raw result was not deleted or rewritten.
+
+## 2026-09-23 — Benchmark v2 and human-vs-solver report
+
+### `3f83302` — Add human-solver research mapping and benchmark v2
+
+Changes:
+
+- archived the original blind v1 snapshot server-side;
+- changed the active public benchmark identity to `difficulty-v2-benchmark-v2`;
+- restored the second B03 empty tube;
+- kept B01–B12 IDs stable inside the new benchmark identity;
+- allowed the submission API to validate both current v2 and legacy v1 clients;
+- added server-only solver/source metrics;
+- added benchmark switching to `/report`;
+- added per-puzzle human + solver comparison;
+- added Spearman correlation rows;
+- automatically excludes invalid v1 B03 from correlations.
+
+The benchmark version bump is intentional: v1 and v2 must never share the same database uniqueness namespace because B03 represents a different board.
