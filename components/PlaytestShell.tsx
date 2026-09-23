@@ -507,7 +507,8 @@ export function PlaytestShell() {
             </label>
 
             <label>
-              信心 1–5（可選）
+              對難度評分的信心 1–5（可選）
+              <span className="field-help">1 = 很不確定，5 = 很確定這個難度評分能代表你的實際感受</span>
               <select value={confidence} onChange={(event) => setConfidence(event.target.value)}>
                 <option value="">略過</option>
                 {[1, 2, 3, 4, 5].map((value) => (
