@@ -1,6 +1,6 @@
 # Next Steps / Handoff
 
-Last updated: 2026-09-23
+Last updated: 2026-09-26
 
 ## Current state
 
@@ -56,9 +56,16 @@ Do not use the 12-row v1 set as formal calibration evidence.
 
 The remaining 11 valid v1 puzzles can still be used for exploratory human-vs-solver pattern inspection.
 
-## Immediate next step: collect clean v2 human samples
+## Immediate next step: collect clean v2 human samples and separate shallow give-ups
 
 The main engineering prerequisite for correlation is now implemented.
+
+Current live v2 state as of 2026-09-26:
+
+- 14 submitted puzzle results;
+- 3 anonymous sessions;
+- one complete 12-puzzle session;
+- two additional sessions with one shallow give-up each (B03 and B12).
 
 Next research work is to collect a clean cohort on v2:
 
@@ -66,9 +73,11 @@ Next research work is to collect a clean cohort on v2:
 - verify each new row has `client_version` and `server_version`;
 - collect multiple independent sessions per puzzle;
 - avoid changing benchmark geometry during collection;
-- periodically inspect correlation stability by client-version cohort.
+- periodically inspect correlation stability by client-version cohort;
+- add an analysis-layer attempt-depth / engagement classification for give-ups using elapsed time, legal moves, and restarts;
+- keep raw shallow give-ups, but inspect or stratify them separately before treating them as intrinsic puzzle-difficulty evidence.
 
-Do not interpret one tester's correlation coefficients as model validation.
+Do not interpret one tester's correlation coefficients, or very shallow give-ups, as model validation.
 
 ## After enough v2 samples
 
