@@ -1,6 +1,6 @@
 # Research Methodology
 
-Last updated: 2026-09-23
+Last updated: 2026-09-26
 
 This document defines how the Water Sort developer playtest data should be collected and interpreted. It is deliberately stricter than the UI implementation notes so later calibration work can distinguish valid samples from exploratory ones.
 
@@ -206,3 +206,39 @@ The report currently compares selected pairs including:
 Correlation rows state their effective puzzle count. For v1, B03 is automatically excluded.
 
 These statistics are exploratory. Multiple independent v2 sessions are still required before using them for difficulty calibration.
+
+
+## Give-up engagement / attempt-depth interpretation
+
+A `gave-up` outcome is not automatically evidence that the puzzle itself is difficult.
+
+Difficulty interpretation must consider how much interaction occurred before the player gave up. In particular, a short attempt with near-zero legal moves and no or very few restarts may reflect:
+
+- uncertainty about the rules or how to begin;
+- interface/onboarding friction;
+- low engagement or willingness to continue;
+- interruption;
+- or genuine puzzle difficulty.
+
+Those causes cannot be separated from the outcome code alone.
+
+Therefore, raw give-up samples must always be retained, but difficulty analysis should distinguish at least three conceptual attempt-depth groups:
+
+- **minimal attempt** — very limited interaction before give-up;
+- **meaningful attempt** — enough play to provide some evidence about puzzle difficulty;
+- **sustained attempt** — substantial interaction/restarts before give-up.
+
+Exact thresholds are not fixed yet. They should be defined from observed elapsed time, legal-move count, and restart behavior before being used as an exclusion/weighting rule. Do not retroactively delete raw samples.
+
+### 2026-09-26 early-give-up examples
+
+After the first complete v2 session, two additional anonymous sessions submitted one result each.
+
+Production aggregates imply:
+
+- **B03**: the additional sample gave up after approximately 21 seconds, with **0 legal moves** and **1 restart**, rated difficulty **5**, and selected `no-next-move`;
+- **B12**: the additional sample gave up after approximately 37 seconds, with **2 legal moves** and **0 restarts**, rated difficulty **4**, and selected `no-next-move`.
+
+These are useful behavioral/onboarding observations, but they are weak evidence that B03 or B12 are intrinsically difficult. They should not be treated the same way as a sustained failed attempt such as a player spending several minutes, making many moves, and repeatedly restarting.
+
+Until an explicit attempt-depth rule is implemented, interpret correlations containing these early give-ups cautiously and inspect the underlying time/move/restart pattern before drawing a difficulty conclusion.
