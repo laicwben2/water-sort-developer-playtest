@@ -1,6 +1,6 @@
 # Development History
 
-Last updated: 2026-09-23
+Last updated: 2026-09-26
 
 This is a concise record of research-relevant changes. Git remains the authoritative source for exact code diffs; this file records why important changes matter to the playtest and its data.
 
@@ -188,3 +188,23 @@ LEGACY_BENCHMARK
 ```
 
 Production deployment for `af0480e` reached `READY`. The v1 report was then verified over the live Neon data with B03 excluded from correlation.
+
+
+## 2026-09-26 — Early give-up samples identified as a separate data-quality case
+
+The live v2 report increased from 12 results / 1 anonymous session to 14 results / 3 anonymous sessions.
+
+The two new results were both very shallow give-ups:
+
+- B03: approximately 21 seconds, 0 legal moves, 1 restart, difficulty 5, reason `no-next-move`;
+- B12: approximately 37 seconds, 2 legal moves, 0 restarts, difficulty 4, reason `no-next-move`.
+
+These samples are retained as valid raw behavioral observations. However, because there was very little interaction before giving up, they are not treated as equivalent to sustained failed attempts when interpreting intrinsic puzzle difficulty.
+
+Research consequence:
+
+- future analysis should classify give-up samples by attempt depth / engagement using elapsed time, move count, and restart count;
+- exact thresholds are not yet fixed;
+- early give-ups should be inspected separately before using them to fit or validate a difficulty model.
+
+The methodological rule is documented in `docs/research-methodology.md`.
