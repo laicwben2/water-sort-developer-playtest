@@ -1,4 +1,4 @@
-import { readPlaytestReportRows } from '../../../../lib/db'
+import { readPlaytestReportRows } from '../../../lib/db'
 
 export const dynamic = 'force-dynamic'
 
