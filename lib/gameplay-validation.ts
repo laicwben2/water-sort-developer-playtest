@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import samplePack from '../data/ios/development-levels.json'
 import pilotPack from '../data/ios/pilot-levels.json'
+import releasePack from '../data/ios/release-levels.json'
 import { applyMove, calculatePour, isSolved, type Board, type Move } from './game'
 
 export type GameplayAction = ({ type: 'move'; atMs: number } & Move) | { type: 'undo' | 'restart'; atMs: number }
@@ -42,14 +43,16 @@ function date(value: unknown, name: string): string {
 export function boardHash(capacity: number, board: Board): string {
   return createHash('sha256').update(JSON.stringify([capacity, board])).digest('hex')
 }
-// Production registration is deliberately empty until the generator supplies formal levels.
+// Data kind and immutable pack ID keep formal records separate from pilot tests.
 export function registeredPuzzle(raw: unknown): GameplayPuzzle | undefined {
   const value = object(raw)
-  if (value.datasetKind !== 'development') return undefined
-  // Retain old samples so offline records queued before the app update remain valid.
-  const pack = [samplePack, pilotPack].find(pack => pack.packId === value.packId)
-  const level = pack?.levels.find(level => level.id === value.levelId)
-  return pack && level && { datasetKind: 'development', packId: pack.packId, levelId: level.id, capacity: level.capacity, board: level.board }
+  const entry = [
+    {kind: 'development' as const, pack: samplePack},
+    {kind: 'development' as const, pack: pilotPack},
+    {kind: 'production' as const, pack: releasePack},
+  ].find(entry => entry.kind === value.datasetKind && entry.pack.packId === value.packId)
+  const level = entry?.pack.levels.find(level => level.id === value.levelId)
+  return entry && level && {datasetKind: entry.kind, packId: entry.pack.packId, levelId: level.id, capacity: level.capacity, board: level.board}
 }
 export function validateGameplaySession(raw: unknown, puzzle = registeredPuzzle(raw)): GameplaySession {
   const value = object(raw)

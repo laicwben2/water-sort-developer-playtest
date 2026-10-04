@@ -6,7 +6,15 @@ The body is one flat `GameplaySession` (see `lib/gameplay-validation.ts` and the
 
 Actions: `{type:"move",atMs,from,to,color,amount}`, `{type:"undo",atMs}`, `{type:"restart",atMs}`. Time is foreground playing/thinking time, including earlier retries. Replay maintains an undo stack; restart clears the stack and currentMoves, but totalMoves remains cumulative. Completion freezes the record. Replays are never submitted.
 
-Two development packs are registered: the pinned 100-puzzle `mac-local-pilot-v1` shard in `data/ios/pilot-levels.json`, and the original 12 format samples in `data/ios/development-levels.json` (corrected B03 has two empty bottles). The pilot uses immutable packId `mac-local-pilot-v1-shard-000000-000099-0d97846a991f` and preserves source level IDs; provenance is in `data/ios/pilot-source.json`. Research metadata/solutions are excluded from the registered gameplay pack. The old pack stays registered so previously queued offline records remain valid. Both are development/pilot data; production registration is empty. Never relabel sample records as production. The real Swift pilot fixture (`tests/swift-pilot-session.json`) has 14 final moves, 16 cumulative pours, one undo and one restart.
+Three immutable packs are registered:
+
+- `production`: 3,000 formal levels from catalog commit `fe8beaaa8af5312272b68cfcf2fa49686f154f32`, packId `mac-local-pilot-v1-catalog-000000-002999-fe8beaaa8af5`, in `data/ios/release-levels.json`. Provenance is in `data/ios/release-source.json`.
+- `development`: the original 100-puzzle pilot shard pinned to commit `0d97846a991f5e1bd84795129c3c8329eb9bd639`, packId `mac-local-pilot-v1-shard-000000-000099-0d97846a991f`, in `data/ios/pilot-levels.json`.
+- `development`: the previous 12 format samples in `data/ios/development-levels.json` (corrected B03 has two empty bottles).
+
+Old registrations remain so previously queued offline records are valid. Formal and development progress/records remain separate even where IDs and boards overlap; never relabel old records. Source IDs, bottom-to-top boards, capacity and solver-reported optimal move counts are retained, with other research metadata and step-by-step solutions excluded from gameplay packs. Real Swift fixtures cover all three packs; the new formal first-level record has 14 final moves, 16 cumulative pours, one undo and one restart.
+
+The iOS completion rating is derived from final-round `currentMoves` and the registered solver optimum: 3 stars at/below optimum, 2 at/below ceil(optimum×1.25), 1 otherwise. It is not a player difficulty report and does not add fields to the immutable API schema. Replays can improve local star display without uploading another first-play record.
 
 Responses:
 

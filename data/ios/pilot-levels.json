@@ -40,7 +40,10 @@
           1
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 14
+      }
     },
     {
       "id": "ws-local-v1-c000001",
@@ -85,7 +88,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000002",
@@ -135,7 +141,10 @@
           2
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000003",
@@ -174,7 +183,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000004",
@@ -219,7 +231,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000005",
@@ -270,7 +285,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000006",
@@ -308,7 +326,10 @@
           2
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000007",
@@ -353,7 +374,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000008",
@@ -403,7 +427,10 @@
           2
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000009",
@@ -442,7 +469,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 14
+      }
     },
     {
       "id": "ws-local-v1-c000010",
@@ -487,7 +517,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000011",
@@ -537,7 +570,10 @@
           4
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000012",
@@ -576,7 +612,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000013",
@@ -621,7 +660,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000014",
@@ -672,7 +714,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000015",
@@ -711,7 +756,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000016",
@@ -756,7 +804,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000017",
@@ -807,7 +858,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000018",
@@ -846,7 +900,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000019",
@@ -890,7 +947,10 @@
           3
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000020",
@@ -941,7 +1001,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000021",
@@ -980,7 +1043,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000022",
@@ -1025,7 +1091,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000023",
@@ -1076,7 +1145,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000024",
@@ -1115,7 +1187,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000025",
@@ -1160,7 +1235,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 17
+      }
     },
     {
       "id": "ws-local-v1-c000026",
@@ -1211,7 +1289,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000027",
@@ -1249,7 +1330,10 @@
           4
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000028",
@@ -1294,7 +1378,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000029",
@@ -1345,7 +1432,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000030",
@@ -1384,7 +1474,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 13
+      }
     },
     {
       "id": "ws-local-v1-c000031",
@@ -1429,7 +1522,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000032",
@@ -1480,7 +1576,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 24
+      }
     },
     {
       "id": "ws-local-v1-c000033",
@@ -1519,7 +1618,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 17
+      }
     },
     {
       "id": "ws-local-v1-c000034",
@@ -1564,7 +1666,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000035",
@@ -1614,7 +1719,10 @@
           6
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000036",
@@ -1652,7 +1760,10 @@
           4
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 14
+      }
     },
     {
       "id": "ws-local-v1-c000037",
@@ -1697,7 +1808,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000038",
@@ -1748,7 +1862,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 24
+      }
     },
     {
       "id": "ws-local-v1-c000039",
@@ -1787,7 +1904,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000040",
@@ -1832,7 +1952,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000041",
@@ -1883,7 +2006,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000042",
@@ -1922,7 +2048,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 13
+      }
     },
     {
       "id": "ws-local-v1-c000043",
@@ -1967,7 +2096,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000044",
@@ -2018,7 +2150,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000045",
@@ -2056,7 +2191,10 @@
           4
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000046",
@@ -2101,7 +2239,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000047",
@@ -2152,7 +2293,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000048",
@@ -2191,7 +2335,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000049",
@@ -2235,7 +2382,10 @@
           2
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000050",
@@ -2286,7 +2436,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000051",
@@ -2325,7 +2478,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000052",
@@ -2370,7 +2526,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 14
+      }
     },
     {
       "id": "ws-local-v1-c000053",
@@ -2421,7 +2580,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000054",
@@ -2460,7 +2622,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000055",
@@ -2504,7 +2669,10 @@
           1
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000056",
@@ -2555,7 +2723,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000057",
@@ -2594,7 +2765,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 14
+      }
     },
     {
       "id": "ws-local-v1-c000058",
@@ -2639,7 +2813,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000059",
@@ -2690,7 +2867,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000060",
@@ -2729,7 +2909,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 14
+      }
     },
     {
       "id": "ws-local-v1-c000061",
@@ -2774,7 +2957,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000062",
@@ -2825,7 +3011,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000063",
@@ -2864,7 +3053,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 17
+      }
     },
     {
       "id": "ws-local-v1-c000064",
@@ -2909,7 +3101,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000065",
@@ -2960,7 +3155,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000066",
@@ -2999,7 +3197,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     },
     {
       "id": "ws-local-v1-c000067",
@@ -3044,7 +3245,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000068",
@@ -3095,7 +3299,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000069",
@@ -3134,7 +3341,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000070",
@@ -3179,7 +3389,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 17
+      }
     },
     {
       "id": "ws-local-v1-c000071",
@@ -3230,7 +3443,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000072",
@@ -3268,7 +3484,10 @@
           2
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 13
+      }
     },
     {
       "id": "ws-local-v1-c000073",
@@ -3313,7 +3532,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000074",
@@ -3364,7 +3586,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 24
+      }
     },
     {
       "id": "ws-local-v1-c000075",
@@ -3402,7 +3627,10 @@
           1
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 12
+      }
     },
     {
       "id": "ws-local-v1-c000076",
@@ -3447,7 +3675,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000077",
@@ -3498,7 +3729,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000078",
@@ -3537,7 +3771,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 17
+      }
     },
     {
       "id": "ws-local-v1-c000079",
@@ -3582,7 +3819,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000080",
@@ -3633,7 +3873,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000081",
@@ -3672,7 +3915,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000082",
@@ -3717,7 +3963,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 21
+      }
     },
     {
       "id": "ws-local-v1-c000083",
@@ -3768,7 +4017,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 20
+      }
     },
     {
       "id": "ws-local-v1-c000084",
@@ -3807,7 +4059,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000085",
@@ -3851,7 +4106,10 @@
           0
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000086",
@@ -3902,7 +4160,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000087",
@@ -3940,7 +4201,10 @@
           2
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 12
+      }
     },
     {
       "id": "ws-local-v1-c000088",
@@ -3985,7 +4249,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000089",
@@ -4036,7 +4303,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 22
+      }
     },
     {
       "id": "ws-local-v1-c000090",
@@ -4075,7 +4345,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000091",
@@ -4120,7 +4393,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 18
+      }
     },
     {
       "id": "ws-local-v1-c000092",
@@ -4171,7 +4447,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000093",
@@ -4209,7 +4488,10 @@
           1
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 13
+      }
     },
     {
       "id": "ws-local-v1-c000094",
@@ -4254,7 +4536,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 19
+      }
     },
     {
       "id": "ws-local-v1-c000095",
@@ -4305,7 +4590,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000096",
@@ -4343,7 +4631,10 @@
           1
         ],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 13
+      }
     },
     {
       "id": "ws-local-v1-c000097",
@@ -4388,7 +4679,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 15
+      }
     },
     {
       "id": "ws-local-v1-c000098",
@@ -4439,7 +4733,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 23
+      }
     },
     {
       "id": "ws-local-v1-c000099",
@@ -4478,7 +4775,10 @@
         ],
         [],
         []
-      ]
+      ],
+      "metadata": {
+        "optimalMoves": 16
+      }
     }
   ]
 }

@@ -3,8 +3,10 @@ import assert from 'node:assert/strict'
 import swiftSession from './swift-session.json'
 import pilotSession from './swift-pilot-session.json'
 import pilotPack from '../data/ios/pilot-levels.json'
+import releasePack from '../data/ios/release-levels.json'
+import releaseSession from './swift-release-session.json'
 import samplePack from '../data/ios/development-levels.json'
-import { validateGameplaySession, payloadHash, GameplayValidationError } from '../lib/gameplay-validation'
+import { validateGameplaySession, payloadHash, GameplayValidationError, registeredPuzzle } from '../lib/gameplay-validation'
 import { confirmDuplicate, GameplayConflictError } from '../lib/gameplay-db'
 import { handleGameplayPost, MAX_GAMEPLAY_BYTES } from '../lib/gameplay-http'
 import { validateSubmissionRequest } from '../lib/submission-validation'
@@ -78,6 +80,7 @@ test('streaming request size enforced even with absent content-length', async ()
 test('pinned 100-puzzle pilot accepts real Swift completion while old queued samples stay registered', async () => {
   assert.equal(pilotPack.levels.length, 100)
   assert.equal(pilotPack.levels[0].id, 'ws-local-v1-c000000')
+  assert.equal(pilotPack.levels[0].metadata.optimalMoves, 14)
   assert.equal(pilotPack.levels[99].id, 'ws-local-v1-c000099')
   const row = validateGameplaySession(pilotSession)
   assert.equal(row.currentMoves, 14); assert.equal(row.totalMoves, 16)
@@ -90,4 +93,24 @@ test('pinned 100-puzzle pilot accepts real Swift completion while old queued sam
   const response = await handleGameplayPost(request(pilotSession), async () => { saved++ })
   assert.equal(response.status, 200); assert.equal(saved, 1)
   assert.deepEqual(await response.json(), {ok: true, sessionId: pilotSession.sessionId.toLowerCase()})
+})
+
+test('3000 formal puzzles accept production Swift records while pilot identities stay separate', async () => {
+  assert.equal(releasePack.levels.length, 3000)
+  assert.equal(releasePack.levels[2999].id, 'ws-local-v1-c002999')
+  for (const level of releasePack.levels) {
+    const puzzle = registeredPuzzle({datasetKind:'production',packId:releasePack.packId,levelId:level.id})
+    assert.ok(puzzle); assert.equal(puzzle.datasetKind, 'production')
+    assert.deepEqual(puzzle.board, level.board)
+  }
+  const row = validateGameplaySession(releaseSession)
+  assert.equal(row.datasetKind, 'production'); assert.equal(row.currentMoves, 14)
+  assert.equal(row.totalMoves, 16); assert.equal(row.undos, 1); assert.equal(row.restarts, 1)
+  assert.equal(releasePack.levels[0].metadata.optimalMoves, 14)
+  assert.equal(validateGameplaySession(pilotSession).datasetKind, 'development')
+  assert.throws(() => validateGameplaySession({...releaseSession, datasetKind:'development'}))
+  assert.throws(() => validateGameplaySession({...pilotSession, datasetKind:'production'}))
+  const response = await handleGameplayPost(request(releaseSession), async () => {})
+  assert.equal(response.status, 200)
+  assert.deepEqual(await response.json(), {ok:true,sessionId:releaseSession.sessionId.toLowerCase()})
 })
