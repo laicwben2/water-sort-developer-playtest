@@ -26,10 +26,10 @@ test('challenge rejects mismatched sums, optimum, player, omitted first or extra
   const repeat=clone();repeat.sessions[1].sessionId=repeat.sessions[0].sessionId;assert.throws(()=>validateThreeStarChallenge(repeat))
   const wrongKind=clone();wrongKind.datasetKind='development';assert.throws(()=>validateThreeStarChallenge(wrongKind))
 })
-test('challenge rejects illegal actions, a non-three-star finish, and chronological reversal',()=>{
+test('challenge rejects illegal actions, a non-three-star finish, and mismatched first-event order',()=>{
   const bad=clone();bad.sessions[1].actions[0].amount=(bad.sessions[1].actions[0].amount??0)+1;assert.throws(()=>validateThreeStarChallenge(bad))
   const noWin=clone();noWin.sessions.pop();noWin.challengeId=noWin.sessions.at(-1)!.sessionId;noWin.achievedAt=noWin.sessions.at(-1)!.completedAt;assert.throws(()=>validateThreeStarChallenge(noWin))
-  const reversed=clone();[reversed.sessions[0],reversed.sessions[1]]=[reversed.sessions[1],reversed.sessions[0]];reversed.firstSessionId=reversed.sessions[0].sessionId;assert.throws(()=>validateThreeStarChallenge(reversed))
+  const reversed=clone();[reversed.sessions[0],reversed.sessions[1]]=[reversed.sessions[1],reversed.sessions[0]];assert.throws(()=>validateThreeStarChallenge(reversed))
 })
 test('challenge UUIDs and dates normalize; immutable conflicting payloads cannot overwrite',()=>{
   const a=validateThreeStarChallenge(clone()), raw=clone()
@@ -52,4 +52,22 @@ test('challenge storage outage defers retry, conflict preserves data, and bounde
   const oversized=new Request('https://example.test',{method:'POST',headers:{'Content-Type':'application/json'},body:new Uint8Array(MAX_GAMEPLAY_BYTES+1)})
   assert.equal((await handleThreeStarPost(oversized,async()=>{throw new Error('must not save')})).status,413)
   assert.equal((await handleThreeStarPost(new Request('https://example.test',{method:'POST',body:'{}'}),async()=>{})).status,415)
+})
+
+test('clock rollback between attempts preserves supplied completion-event order', async()=>{
+  const raw=clone()
+  for(let i=1;i<raw.sessions.length;i++) {
+    const start=Date.parse(raw.sessions[0].startedAt)-i*60000
+    raw.sessions[i].startedAt=new Date(start).toISOString()
+    raw.sessions[i].completedAt=new Date(start+1000).toISOString()
+  }
+  raw.startedAt=raw.sessions.at(-1)!.startedAt; raw.achievedAt=raw.sessions.at(-1)!.completedAt
+  const row=validateThreeStarChallenge(raw)
+  assert.equal(row.sessions[0].sessionId,row.firstSessionId)
+  assert.equal(row.sessions.at(-1)!.sessionId,row.challengeId)
+  let saved=0
+  const result=await handleThreeStarPost(request(raw),async()=>{saved++})
+  assert.equal(result.status,200);assert.equal(saved,1)
+  const bad=clone();bad.sessions[1].completedAt=new Date(Date.parse(bad.sessions[1].startedAt)-1).toISOString()
+  assert.throws(()=>validateThreeStarChallenge(bad))
 })

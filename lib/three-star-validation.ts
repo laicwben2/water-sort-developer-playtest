@@ -30,7 +30,7 @@ export function validateThreeStarChallenge(raw: unknown): ThreeStarChallengeReco
   for (let i=0;i<sessions.length;i++) {
     const row=sessions[i]
     if(row.playerId!==playerId || row.datasetKind!==value.datasetKind || row.packId!==value.packId || row.levelId!==value.levelId || row.boardHash!==value.boardHash || row.capacity!==value.capacity) fail('Mixed challenge identities')
-    if(i>0 && row.completedAt<sessions[i-1].completedAt) fail('Sessions out of completion order')
+    // The array records durable client completion order; wall clocks may move backwards.
     if(i===sessions.length-1 ? row.currentMoves>puzzle.optimalMoves : row.currentMoves<=puzzle.optimalMoves) fail('Challenge does not end at first three stars')
   }
   function sum(key: 'elapsedMs'|'totalMoves'|'restarts'|'undos') { return sessions.reduce((a,s)=>Math.min(Number.MAX_SAFE_INTEGER-a,s[key])+a,0) }
