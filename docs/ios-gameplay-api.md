@@ -4,7 +4,7 @@
 
 The body is one flat `GameplaySession` (see `lib/gameplay-validation.ts` and the actual Swift-generated `tests/swift-session.json`). Required fields: schemaVersion=1, source=ios, persistent sessionId/playerId UUIDs, datasetKind, packId, levelId, boardHash, rulesVersion=classic-v1, capacity, startedAt/completedAt UTC dates, elapsedMs, currentMoves, totalMoves, restarts, undos, actions, finalBoard, clientVersion. No difficulty feedback. `boardHash` is lowercase SHA-256 of UTF-8 `JSON.stringify([capacity, initialBoard])`; bottles are bottom→top.
 
-Actions: `{type:"move",atMs,from,to,color,amount}`, `{type:"undo",atMs}`, `{type:"restart",atMs}`. Time is foreground playing/thinking time, including earlier retries. Replay maintains an undo stack; restart clears the stack and currentMoves, but totalMoves remains cumulative. Completion freezes the record. Replays are never submitted.
+Actions: `{type:"move",atMs,from,to,color,amount}`, `{type:"undo",atMs}`, `{type:"restart",atMs}`. Time is foreground playing/thinking time, including earlier retries. Replay maintains an undo stack; restart clears the stack and currentMoves, but totalMoves remains cumulative. Completion freezes the record. Individual replays are not submitted here; attempts before the first three-star win are included in the separate challenge endpoint.
 
 Three immutable packs are registered:
 
@@ -27,3 +27,5 @@ Streaming input is bounded to 8 MiB even without a content-length header. Hostin
 `ios_gameplay_sessions` is separate from `playtest_submissions`. The first valid request creates its schema idempotently using the existing DATABASE_URL. Constraints: session_id primary key and unique `(player_id,dataset_kind,pack_id,level_id,board_hash)`. Inserts use ON CONFLICT DO NOTHING, followed by an immutable payload comparison. UUID/date formatting is normalized before hashing. No duplicate request updates an existing row. Concurrent insert conflicts are read in a separate statement after the insert has finished waiting.
 
 Run `pnpm test:gameplay` and `pnpm build`. The tests replay a real Swift export, exercise undo/restart and cumulative counts, old/new format separation, request limits, duplicate identity and storage outages. A live database migration/concurrency run remains a deployment verification step; unit tests do not substitute for that.
+
+Extra challenge endpoint: [three-star-api.md](three-star-api.md). Both preserve the immutable first-play payload and use independent acknowledgements.

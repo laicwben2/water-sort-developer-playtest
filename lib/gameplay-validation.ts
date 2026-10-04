@@ -12,30 +12,30 @@ export interface GameplaySession {
   elapsedMs: number; currentMoves: number; totalMoves: number; restarts: number; undos: number
   actions: GameplayAction[]; finalBoard: Board; clientVersion: string
 }
-export interface GameplayPuzzle { datasetKind: 'development' | 'production'; packId: string; levelId: string; capacity: number; board: Board }
+export interface GameplayPuzzle { datasetKind: 'development' | 'production'; packId: string; levelId: string; capacity: number; board: Board; optimalMoves?: number }
 export class GameplayValidationError extends Error {}
 function fail(message: string): never { throw new GameplayValidationError(message) }
-function object(value: unknown): Record<string, unknown> {
+export function object(value: unknown): Record<string, unknown> {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) fail('Expected an object')
   return value as Record<string, unknown>
 }
-function keys(value: Record<string, unknown>, expected: string[]) {
+export function keys(value: Record<string, unknown>, expected: string[]) {
   if (Object.keys(value).some(k => !expected.includes(k)) || expected.some(k => !(k in value))) fail('Unexpected or missing field')
 }
-function integer(value: unknown, name: string, max = Number.MAX_SAFE_INTEGER): number {
+export function integer(value: unknown, name: string, max = Number.MAX_SAFE_INTEGER): number {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < 0 || value > max) fail('Invalid ' + name)
   return value as number
 }
-function text(value: unknown, name: string, max = 200): string {
+export function text(value: unknown, name: string, max = 200): string {
   if (typeof value !== 'string' || value.length < 1 || value.length > max) fail('Invalid ' + name)
   return value as string
 }
-function uuid(value: unknown, name: string) {
+export function uuid(value: unknown, name: string) {
   const parsed = text(value, name, 36)
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(parsed)) fail('Invalid ' + name)
   return parsed.toLowerCase()
 }
-function date(value: unknown, name: string): string {
+export function date(value: unknown, name: string): string {
   const parsed = text(value, name, 40)
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(parsed) || !Number.isFinite(Date.parse(parsed))) fail('Invalid ' + name)
   return new Date(parsed).toISOString()
@@ -52,7 +52,7 @@ export function registeredPuzzle(raw: unknown): GameplayPuzzle | undefined {
     {kind: 'production' as const, pack: releasePack},
   ].find(entry => entry.kind === value.datasetKind && entry.pack.packId === value.packId)
   const level = entry?.pack.levels.find(level => level.id === value.levelId)
-  return entry && level && {datasetKind: entry.kind, packId: entry.pack.packId, levelId: level.id, capacity: level.capacity, board: level.board}
+  return entry && level && {datasetKind: entry.kind, packId: entry.pack.packId, levelId: level.id, capacity: level.capacity, board: level.board, optimalMoves: "metadata" in level ? (level.metadata as {optimalMoves?: number}).optimalMoves : undefined}
 }
 export function validateGameplaySession(raw: unknown, puzzle = registeredPuzzle(raw)): GameplaySession {
   const value = object(raw)

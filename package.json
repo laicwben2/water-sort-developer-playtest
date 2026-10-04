@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test:gameplay": "tsc -p tests/tsconfig.json && node --test .test-build/tests/gameplay.test.js"
+    "test:gameplay": "tsc -p tests/tsconfig.json && node --test .test-build/tests/gameplay.test.js .test-build/tests/three-star.test.js"
   },
   "dependencies": {
     "next": "^16.0.0",

@@ -1,8 +1,8 @@
 import { GameplayValidationError, validateGameplaySession, type GameplaySession } from './gameplay-validation'
 import { GameplayConflictError } from './gameplay-db'
 export const MAX_GAMEPLAY_BYTES = 8 * 1024 * 1024
-class TooLargeError extends Error {}
-async function readBody(request: Request): Promise<unknown> {
+export class TooLargeError extends Error {}
+export async function readGameplayBody(request: Request): Promise<unknown> {
   if (Number(request.headers.get('content-length')) > MAX_GAMEPLAY_BYTES) throw new TooLargeError()
   const reader = request.body?.getReader()
   if (!reader) throw new SyntaxError()
@@ -25,7 +25,7 @@ async function readBody(request: Request): Promise<unknown> {
 export async function handleGameplayPost(request: Request, save: (record: GameplaySession) => Promise<void>): Promise<Response> {
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return Response.json({ error: 'Expected application/json' }, { status: 415 })
   try {
-    const record = validateGameplaySession(await readBody(request))
+    const record = validateGameplaySession(await readGameplayBody(request))
     const key = request.headers.get('idempotency-key')
     if (key && key.toLowerCase() !== record.sessionId) throw new GameplayValidationError('Idempotency key must match sessionId')
     await save(record)
