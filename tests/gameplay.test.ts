@@ -1,6 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import swiftSession from './swift-session.json'
+import pilotSession from './swift-pilot-session.json'
+import pilotPack from '../data/ios/pilot-levels.json'
 import samplePack from '../data/ios/development-levels.json'
 import { validateGameplaySession, payloadHash, GameplayValidationError } from '../lib/gameplay-validation'
 import { confirmDuplicate, GameplayConflictError } from '../lib/gameplay-db'
@@ -71,4 +73,21 @@ test('streaming request size enforced even with absent content-length', async ()
   assert.equal(result.status,413); assert.equal(called,false)
   const malformed=new Request('https://example.test',{method:'POST',headers:{'Content-Type':'application/json'},body:'{'})
   assert.equal((await handleGameplayPost(malformed,async()=>{})).status,400)
+})
+
+test('pinned 100-puzzle pilot accepts real Swift completion while old queued samples stay registered', async () => {
+  assert.equal(pilotPack.levels.length, 100)
+  assert.equal(pilotPack.levels[0].id, 'ws-local-v1-c000000')
+  assert.equal(pilotPack.levels[99].id, 'ws-local-v1-c000099')
+  const row = validateGameplaySession(pilotSession)
+  assert.equal(row.currentMoves, 14); assert.equal(row.totalMoves, 16)
+  assert.equal(row.undos, 1); assert.equal(row.restarts, 1)
+  assert.equal(row.datasetKind, 'development')
+  assert.equal(validateGameplaySession(clone()).packId, samplePack.packId)
+  assert.throws(() => validateGameplaySession({...pilotSession, packId: samplePack.packId}))
+  assert.throws(() => validateGameplaySession({...pilotSession, datasetKind: 'production'}))
+  let saved = 0
+  const response = await handleGameplayPost(request(pilotSession), async () => { saved++ })
+  assert.equal(response.status, 200); assert.equal(saved, 1)
+  assert.deepEqual(await response.json(), {ok: true, sessionId: pilotSession.sessionId.toLowerCase()})
 })

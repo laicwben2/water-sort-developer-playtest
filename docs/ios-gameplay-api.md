@@ -6,7 +6,7 @@ The body is one flat `GameplaySession` (see `lib/gameplay-validation.ts` and the
 
 Actions: `{type:"move",atMs,from,to,color,amount}`, `{type:"undo",atMs}`, `{type:"restart",atMs}`. Time is foreground playing/thinking time, including earlier retries. Replay maintains an undo stack; restart clears the stack and currentMoves, but totalMoves remains cumulative. Completion freezes the record. Replays are never submitted.
 
-Only the fixed 12 **development format samples** in `data/ios/development-levels.json` are registered. Corrected B03 has two empty bottles. Production registration is empty; these are not formal levels. Add formal packs explicitly with a production registry entry after they are supplied by the generator; never relabel sample records.
+Two development packs are registered: the pinned 100-puzzle `mac-local-pilot-v1` shard in `data/ios/pilot-levels.json`, and the original 12 format samples in `data/ios/development-levels.json` (corrected B03 has two empty bottles). The pilot uses immutable packId `mac-local-pilot-v1-shard-000000-000099-0d97846a991f` and preserves source level IDs; provenance is in `data/ios/pilot-source.json`. Research metadata/solutions are excluded from the registered gameplay pack. The old pack stays registered so previously queued offline records remain valid. Both are development/pilot data; production registration is empty. Never relabel sample records as production. The real Swift pilot fixture (`tests/swift-pilot-session.json`) has 14 final moves, 16 cumulative pours, one undo and one restart.
 
 Responses:
 

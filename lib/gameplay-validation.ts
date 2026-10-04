@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import samplePack from '../data/ios/development-levels.json'
+import pilotPack from '../data/ios/pilot-levels.json'
 import { applyMove, calculatePour, isSolved, type Board, type Move } from './game'
 
 export type GameplayAction = ({ type: 'move'; atMs: number } & Move) | { type: 'undo' | 'restart'; atMs: number }
@@ -44,9 +45,11 @@ export function boardHash(capacity: number, board: Board): string {
 // Production registration is deliberately empty until the generator supplies formal levels.
 export function registeredPuzzle(raw: unknown): GameplayPuzzle | undefined {
   const value = object(raw)
-  if (value.datasetKind !== 'development' || value.packId !== samplePack.packId) return undefined
-  const level = samplePack.levels.find(level => level.id === value.levelId)
-  return level && { datasetKind: 'development', packId: samplePack.packId, levelId: level.id, capacity: level.capacity, board: level.board }
+  if (value.datasetKind !== 'development') return undefined
+  // Retain old samples so offline records queued before the app update remain valid.
+  const pack = [samplePack, pilotPack].find(pack => pack.packId === value.packId)
+  const level = pack?.levels.find(level => level.id === value.levelId)
+  return pack && level && { datasetKind: 'development', packId: pack.packId, levelId: level.id, capacity: level.capacity, board: level.board }
 }
 export function validateGameplaySession(raw: unknown, puzzle = registeredPuzzle(raw)): GameplaySession {
   const value = object(raw)
