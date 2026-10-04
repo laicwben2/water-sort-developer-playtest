@@ -36,6 +36,6 @@ Backend changes are in the existing draft PR. Deployment/database verification r
 
 `sessions` 按客戶端持久化的完成事件順序排列，第一筆仍須為 `firstSessionId`，最後一筆仍須為首次三星 `challengeId`。兩局之間的系統時間可能倒退，因此不要求跨局 `completedAt` 遞增；每局內仍要求 completedAt ≥ startedAt，並完整核對合法操作、單調 action.atMs、淨步數、首次三星與聚合統計。`startedAt` 仍為所有 included sessions 的最早日期，`achievedAt` 仍等於末局完成日期。
 
-客戶端單局時鐘倒退會將完成日期保護為 max(開始日期, 觀測完成日期)，elapsedMs 仍由單調時鐘計算。不要用這些牆鐘日期差替代遊玩時間。原 schema 1／接口／冪等性與不可變 payload 保留；原正常日期資料仍相容。此變更需部署後才接受跨局日期倒退的挑戰，目前只更新 draft 分支。
+客戶端單局時鐘倒退會將完成日期保護為 max(開始日期, 觀測完成日期)，elapsedMs 仍由單調時鐘計算。不要用這些牆鐘日期差替代遊玩時間。原 schema 1／接口／冪等性與不可變 payload 保留；原正常日期資料仍相容。此變更需部署後才接受跨局日期倒退的挑戰，目前更新 draft 分支；GitHub／Vercel 整合自動產生預覽部署，但正式服務尚未合併更新，預覽服務／資料庫 schema 和 concurrency 尚未驗證。
 
 驗證：17 項 gameplay／三星契約測試與 Next build 通過；新增日期倒退 HTTP 成功收取，保留 firstSessionId 順序不符、局內日期倒退、非法動作、漏局、三星後額外局與冪等 payload 衝突拒絕。
