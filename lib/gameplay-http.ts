@@ -2,8 +2,8 @@ import { GameplayValidationError, validateGameplaySession, type GameplaySession 
 import { GameplayConflictError } from './gameplay-db'
 export const MAX_GAMEPLAY_BYTES = 8 * 1024 * 1024
 export class TooLargeError extends Error {}
-export async function readGameplayBody(request: Request): Promise<unknown> {
-  if (Number(request.headers.get('content-length')) > MAX_GAMEPLAY_BYTES) throw new TooLargeError()
+export async function readGameplayBody(request: Request, maxBytes = MAX_GAMEPLAY_BYTES): Promise<unknown> {
+  if (Number(request.headers.get('content-length')) > maxBytes) throw new TooLargeError()
   const reader = request.body?.getReader()
   if (!reader) throw new SyntaxError()
   const chunks: Uint8Array[] = []; let length = 0
@@ -12,7 +12,7 @@ export async function readGameplayBody(request: Request): Promise<unknown> {
       const { done, value } = await reader.read()
       if (done) break
       length += value.byteLength
-      if (length > MAX_GAMEPLAY_BYTES) { await reader.cancel(); throw new TooLargeError() }
+      if (length > maxBytes) { await reader.cancel(); throw new TooLargeError() }
       chunks.push(value)
     }
   } finally { reader.releaseLock() }

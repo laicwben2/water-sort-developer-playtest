@@ -86,4 +86,4 @@ The report intentionally exposes aggregate research data only. It does not show 
 
 ## Native iPhone records
 
-The iOS draft adds `/api/gameplay-sessions` for immutable first-play records and `/api/three-star-challenges` for all attempts through the first three-star win. Existing `/api/submissions` and `/report` retain their contracts. The formal 3,000-level catalog and previous development packs remain registered. See [first-play contract](docs/ios-gameplay-api.md) and [challenge contract](docs/three-star-api.md). Run `pnpm test:gameplay` and `pnpm build` before deployment.
+The iOS draft adds `/api/gameplay-sessions` for immutable first-play records and `/api/three-star-attempt-parts` for resumable 256 KiB fragments of all attempts through the first three-star win. The older `/api/three-star-challenges` whole-record endpoint is retained. Existing `/api/submissions` and `/report` retain their contracts. The formal 3,000-level catalog and previous development packs remain registered. See [first-play contract](docs/ios-gameplay-api.md) and [challenge contract](docs/three-star-api.md). Run `pnpm test:gameplay` and `pnpm build` before deployment.
