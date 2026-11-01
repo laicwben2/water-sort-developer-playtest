@@ -1,0 +1,11 @@
+{
+  "sourceURL": "https://raw.githubusercontent.com/laicwben2/water-sort-level-generator/0d97846a991f5e1bd84795129c3c8329eb9bd639/data/pilots/mac-local-pilot-v1/shard-000000-000099.json",
+  "sourceSHA256": "a8d4fee29c2e7eb2513852e8155815695c861e7dcf3526b65c5c7636226d6f88",
+  "sourceDigest": "a5e20616055ca3ad026bbe2a71fee3cf359438c65aadb33be02c7d0d8a8ca974",
+  "sourceFormat": "local-shard-v1",
+  "packId": "mac-local-pilot-v1-shard-000000-000099-0d97846a991f",
+  "datasetKind": "development",
+  "ordering": "acceptedPuzzles, candidateIndex ascending",
+  "difficulty": "unrated; research results are not calibrated game difficulty",
+  "levelCount": 100
+}

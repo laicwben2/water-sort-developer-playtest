@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","module":"CommonJS","moduleResolution":"Node","esModuleInterop":true,"resolveJsonModule":true,"strict":true,"skipLibCheck":true,"outDir":"../.test-build"},"include":["./gameplay.test.ts","./three-star.test.ts","./three-star-attempts.test.ts","./three-star-fragments.test.ts","../lib/three-star-fragment-db.ts"]}
